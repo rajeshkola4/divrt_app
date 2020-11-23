@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-   <button @click="openSafari">Open Safari</button>
+    <button @click="copyToClipboard">Copy To ClipBoard</button>
+    <button @click="openSafari">Open Safari</button>
   </div>
 </template>
 
@@ -8,14 +9,21 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Home',
-  components: {
-  },
-  methods:{
-    openSafari(){
-      console.log("clicked Open safari")
-      window.location='googlechrome-x-callback://x-callback-url/open/?url='+encodeURIComponent(location.href)+'&x-source=Safari&x-success='+encodeURIComponent(location.href);
+  name: "Home",
+  components: {},
+  methods: {
+    openSafari() {
+      location.href = "x-web-search://";
+    },
+    copyToClipboard() {
+      const el = document.createElement("textarea");
+      el.value = "https://gmail.com";
+      el.setAttribute("readonly", "");
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
     }
   }
-}
+};
 </script>
